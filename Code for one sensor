@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <wiringPi.h>
+
+#define SENSOR_PIN 0 
+#define MOTOR_PIN 1 
+#define THRESHOLD 500 
+
+int main(void) {
+    int sensorValue;
+    int motorState = 0;
+
+  
+    if (wiringPiSetup() == -1) {
+        printf("Error: Unable to setup wiringPi.\n");
+        return 1;
+    }
+
+    
+    pinMode(MOTOR_PIN, OUTPUT);
+    digitalWrite(MOTOR_PIN, LOW);
+
+    // Main loop
+    while(1) {
+        // Read sensor value
+        sensorValue = analogRead(SENSOR_PIN);
+
+        if (sensorValue > THRESHOLD) {
+           
+            if (!motorState) {
+                digitalWrite(MOTOR_PIN, HIGH);
+                motorState = 1;
+                printf("Threshold exceeded. Motor turned on.\n");
+            }
+        } else {
+           
+            if (motorState) {
+                digitalWrite(MOTOR_PIN, LOW);
+                motorState = 0;
+                printf("Threshold not exceeded. Motor turned off.\n");
+            }
+        }
+
+    
+        delay(100);
+    }
+
+    return 0;
+}
