@@ -1,0 +1,128 @@
+const int motorPin1 = 2;  
+const int motorPin2 = 3; 
+const int motorPin3 = 4;  
+const int motorPin4 = 5;
+const int motorPin5 = 6;  
+const int motorPin6 = 7;
+ 
+const int flexiforcePin0 = A0;
+
+const int flexiforcePin1 = A1;
+const int flexiforcePin2 = A2;
+const int flexiforcePin3 = A3;
+const int flexiforcePin4 = A4;
+const int flexiforcePin5 = A5;
+const int flexiforcePin6 = A6;
+const int flexiforcePin7 = A7;
+
+
+void setup() {
+  pinMode(motorPin1, OUTPUT);
+  pinMode(motorPin2, OUTPUT);
+   pinMode(motorPin3, OUTPUT);
+  pinMode(motorPin4, OUTPUT);
+   pinMode(motorPin5, OUTPUT);
+  pinMode(motorPin6, OUTPUT);
+
+    Serial.begin(9600);
+
+}
+
+
+void loop() {
+ 
+  int pressureValue0 = analogRead(flexiforcePin0);
+  
+  int pressureValue1 = analogRead(flexiforcePin1);
+  int pressureValue2 = analogRead(flexiforcePin2);
+  int pressureValue3 = analogRead(flexiforcePin3);
+  int pressureValue4 = analogRead(flexiforcePin4);
+  int pressureValue5 = analogRead(flexiforcePin5);
+  int pressureValue6 = analogRead(flexiforcePin6);
+  int pressureValue7 = analogRead(flexiforcePin7);
+  
+
+
+
+int p1= pressureValue0 + pressureValue1 + pressureValue2 ;
+int p2= pressureValue3 + pressureValue4;
+int p3= pressureValue5 + pressureValue6 + pressureValue7;
+
+  
+  Serial.print("\n Pressure1: ");
+  Serial.println(pressureValue0);
+   
+   
+ Serial.print("\nPressure2: ");
+Serial.println(pressureValue1);
+    
+Serial.print("\n Pressure3: ");
+Serial.println(pressureValue2);
+
+
+  Serial.println(p1);
+    Serial.print("---------------------------------------------------------------- ");
+    delay(1000);
+  Serial.print("\n Pressure4: ");
+  Serial.println(pressureValue3); 
+ Serial.print("\nPressure5: ");
+Serial.println(pressureValue4);
+    
+  Serial.println(p2);
+    Serial.print("---------------------------------------------------------------- ");
+    delay(1000);
+    Serial.print("\n Pressure6: ");
+Serial.println(pressureValue5);
+  Serial.print("\n Pressure7: ");
+  Serial.println(pressureValue6); 
+ Serial.print("\nPressure8: ");
+Serial.println(pressureValue7);
+    
+  Serial.println(p3);
+    Serial.print("---------------------------------------------------------------- ");
+ delay(100);
+  if(p1>1500){
+
+     digitalWrite(motorPin1, HIGH);
+  digitalWrite(motorPin2, LOW);
+  digitalWrite(motorPin3, HIGH);
+  digitalWrite(motorPin4, LOW);
+   digitalWrite(motorPin5, HIGH);
+  digitalWrite(motorPin6, LOW);
+
+  delay(100);
+
+    }
+
+  else if(p2>800){
+   digitalWrite(motorPin1, HIGH);
+  digitalWrite(motorPin2, LOW);
+  digitalWrite(motorPin3, HIGH);
+  digitalWrite(motorPin4, LOW);
+   digitalWrite(motorPin5, HIGH);
+  digitalWrite(motorPin6, LOW);
+
+ delay(100);
+  }
+
+  else if(p3>1200){
+   digitalWrite(motorPin1, HIGH);
+  digitalWrite(motorPin2, LOW);
+  digitalWrite(motorPin3, HIGH);
+  digitalWrite(motorPin4, LOW);
+   digitalWrite(motorPin5, HIGH);
+  digitalWrite(motorPin6, LOW);
+
+  delay(1000);
+  }
+  
+  else {
+  digitalWrite(motorPin1, LOW);
+  digitalWrite(motorPin2, LOW);
+  digitalWrite(motorPin3, LOW);
+  digitalWrite(motorPin4, LOW);
+  digitalWrite(motorPin5, LOW);
+  digitalWrite(motorPin6, LOW);
+}
+
+}
